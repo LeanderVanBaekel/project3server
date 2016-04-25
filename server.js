@@ -10,7 +10,9 @@ var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://api.leandervanbaekel.nl');
+// mongoose.connect('mongodb://api.leandervanbaekel.nl');
+mongoose.connect('mongodb://root:mudkippers8@37.139.27.8:27017');
+
 console.log(mongoose.connection.readyState);
 
 // configure app to use bodyParser()
