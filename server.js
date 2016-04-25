@@ -31,10 +31,26 @@ var port = process.env.PORT || 8080;        // set our port
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
-// test route to make sure everything is working (accessed at GET http://localhost:8080)
 router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
+
+router.route('/esp')
+	.get(function(req, res) {
+		res.json({message : 'Trying to GET esp data'});
+	})
+	.post(function(req, res) {
+		res.json({message : 'Trying to POST esp data'});
+	});
+
+router.route('/esp/:id')
+	.get(function(req, res) {
+		var values = req.params.id;
+		res.json({message : 'Trying to GET esp data with id: ' + req.params.id});
+	})
+	.post(function(req, res) {
+		res.json({message : 'Trying to POST esp data with id: ' + req.params.id});
+	});
 
 // more routes for our API will happen here
 app.use('/', router);
