@@ -20,11 +20,6 @@ MongoClient.connect('mongodb://127.0.0.1:27017/project3db', function (err, db) {
     db.close();
 });
 
-// var mongoose = require('mongoose');
-// mongoose.connect('mongodb://api.leandervanbaekel.nl');
-// mongoose.connect('mongodb://root:mudkippers8@37.139.27.8:27017');
-// console.log(mongoose.connection.readyState);
-
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
