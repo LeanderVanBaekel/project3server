@@ -8,12 +8,22 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 
-var mongoose = require('mongoose');
 
+var MongoClient = require('mongodb').MongoClient
+    , format = require('util').format;
+MongoClient.connect('mongodb://127.0.0.1:27017/test', function (err, db) {
+    if (err) {
+        throw err;
+    } else {
+        console.log("successfully connected to the database");
+    }
+    db.close();
+});
+
+// var mongoose = require('mongoose');
 // mongoose.connect('mongodb://api.leandervanbaekel.nl');
-mongoose.connect('mongodb://root:mudkippers8@37.139.27.8:27017');
-
-console.log(mongoose.connection.readyState);
+// mongoose.connect('mongodb://root:mudkippers8@37.139.27.8:27017');
+// console.log(mongoose.connection.readyState);
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
