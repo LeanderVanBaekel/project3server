@@ -19,7 +19,7 @@ router.route('/:id')
 
 		if (id=="esp1") {
 			
-			var query = Esp2.find().sort({date: -1}).limit(10);
+			var query = Esp1.find().sort({date: -1}).limit(10);
 
 			query.exec(function(err, data){
 				if (err){
