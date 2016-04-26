@@ -14,6 +14,7 @@ module.exports = {
 			if (err) {console.error(err);}
 	    	if (doc !== null) {
 	        	console.dir(doc);
+	        	return doc;
 	    	} else {
 	        	callback();
 	      	}
