@@ -14,21 +14,6 @@ mongoose.connect(url); // connect to our database
 router.route('/')
 	.get(function(req, res) {
 		res.json({message : 'Trying to GET userinput'});
-	});
-	// .post(function(req, res) {
-	// 	res.json({message : 'Trying to POST userinput'});
-	// });
-
-router.route('/:id')
-	.get(function(req, res) {
-		var values = req.params.id;
-		Alarm.find(function(err, alarms) {
-            if (err){
-                res.send(err);
-            }
-
-            res.json(alarms);
-        });
 	})
 	.post(function(req, res) {
         
@@ -46,7 +31,35 @@ router.route('/:id')
         });
         
     });
+	// .post(function(req, res) {
+	// 	res.json({message : 'Trying to POST userinput'});
+	// });
 
+router.route('/all')
+	.get(function(req, res) {
+		var values = req.params.id;
+		Alarm.find(function(err, alarms) {
+            if (err){
+                res.send(err);
+            }
 
+            console.log(alarms);
+            res.json(alarms);
+        });
+	});
+
+router.route('/latest')
+	.get(function(req, res){
+		var query = Alarm.find().sort({date: -1}).limit(1);
+
+		query.exec(function(err, alarms){
+			if (err){
+                res.send(err);
+            }
+
+            console.log(alarms);
+            res.json(alarms);
+		});
+	});
 
 module.exports = router;
