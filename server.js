@@ -30,8 +30,8 @@ var port = process.env.PORT || 8080;        // set our port
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
-router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+app.get('/', function(req, res){
+  res.json({ message: 'hooray! welcome to our api!' });   
 });
 
 var espRouter = require('./routes/esp');
