@@ -37,6 +37,9 @@ app.get('/', function(req, res){
 var espRouter = require('./routes/esp');
 app.use('/esp', espRouter);
 
+var userInputRouter = require('./routes/userInput');
+app.use('/user-input', userInputRouter);
+
 // more routes for our API will happen here
 
 
