@@ -21,7 +21,7 @@ router.route('/:id')
 			
 			var query = Esp2.find().sort({date: -1}).limit(10);
 
-			query.execfunction(err, data){
+			query.exec(function(err, data){
 				if (err){
 	                res.send(err);
 	            }
