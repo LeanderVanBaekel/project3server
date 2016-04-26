@@ -9,4 +9,3 @@ var esp  = new Schema({
 });
 
 module.exports = mongoose.model('Esp1', esp);
-module.exports = mongoose.model('Esp2', esp);
