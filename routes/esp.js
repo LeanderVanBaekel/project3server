@@ -6,8 +6,8 @@ var url = 'mongodb://localhost:27017/project3db';
 
 
 // function to insert data in esp1 collection
-var insertDocument = function(db, data, callback) {
-	db.collection('esp1').insertOne( data, function(err, result) {
+var insertDocument = function(db, collection, data, callback) {
+	db.collection(collection).insertOne( data, function(err, result) {
 		if (err) {console.error(err);}
 		
 		console.log("Inserted a document into the esp1 collection.");
@@ -16,11 +16,13 @@ var insertDocument = function(db, data, callback) {
 };
 
 // function to find data from db
-var findShit = function(db, callback) {
-   var cursor = db.collection('esp1').find( );
-   cursor.each(function(err, doc) {
+var findShit = function(db, collection, query, callback) {
+	//query format: "{field2: value}"
+
+   	var cursor = db.collection(collection).find(query);
+   	cursor.each(function(err, doc) {
 		if (err) {console.error(err);}
-    	if (doc != null) {
+    	if (doc !== null) {
         	console.dir(doc);
     	} else {
         	callback();
@@ -50,18 +52,18 @@ router.route('/:sensor1/:sensor2/:sensor3')
 			"sensor1" : sensor1,
 			"sensor2" : sensor2,
 			"sensor3" : sensor3
-		}
+		};
 
 		MongoClient.connect(url, function(err, db) {
 			if (err) {console.error(err);}
-			insertDocument(db, data, function() {
+			insertDocument(db, 'esp1', data, function() {
 				db.close();
 			});
 		});
 
 		MongoClient.connect(url, function(err, db) {
 			if (err) {console.error(err);}
-			findShit(db, function() {
+			findShit(db, 'esp1', {sensor1: 'hoi'}, function() {
 				db.close();
 			});
 		});
