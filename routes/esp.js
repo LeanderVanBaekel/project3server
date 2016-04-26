@@ -3,30 +3,9 @@ var router = express.Router();
 var fs = require('fs');
 var MongoClient = require('mongodb');
 var url = 'mongodb://localhost:27017/project3db';
+var dbFunctions = require('../dbfunctions.js');
 
 
-// function to insert data in esp1 collection
-var insertDocument = function(db, data, callback) {
-	db.collection('esp1').insertOne( data, function(err, result) {
-		if (err) {console.error(err);}
-		
-		console.log("Inserted a document into the esp1 collection.");
-		callback();
-	});
-};
-
-// function to find data from db
-var findShit = function(db, callback) {
-   var cursor = db.collection('esp1').find( );
-   cursor.each(function(err, doc) {
-		if (err) {console.error(err);}
-    	if (doc != null) {
-        	console.dir(doc);
-    	} else {
-        	callback();
-      	}
-   });
-};
 
 
 router.route('/')
@@ -50,28 +29,26 @@ router.route('/:sensor1/:sensor2/:sensor3')
 			"sensor1" : sensor1,
 			"sensor2" : sensor2,
 			"sensor3" : sensor3
-		}
+		};
 
 		MongoClient.connect(url, function(err, db) {
 			if (err) {console.error(err);}
-			insertDocument(db, data, function() {
+			dbFunctions.insertDocument(db, 'esp1', data, function() {
 				db.close();
 			});
 		});
 
 		MongoClient.connect(url, function(err, db) {
 			if (err) {console.error(err);}
-			findShit(db, function() {
+			dbFunctions.findShit(db, 'esp1', {sensor1: 'hoi'}, function() {
 				db.close();
 			});
 		});
 
-		res.json({message : 'Trying to GET esp data with id: ' + req.params.id});
+		res.json({message : 'Trying to GET esp data with id: ' + req.params.sensor1});
 	})
 	.post(function(req, res) {
-		res.json({message : 'Trying to POST esp data with id: ' + req.params.id});
+		res.json({message : 'Trying to POST esp data with id: ' + req.params.sensor1});
 	});
-
-
 
 module.exports = router;
