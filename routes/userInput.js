@@ -5,8 +5,6 @@ var fs = require('fs');
 
 //router.get('/', function(req, res, next){
 
-
-
 router.route('/')
 	.get(function(req, res) {
 		res.json({message : 'Trying to GET userinput'});
