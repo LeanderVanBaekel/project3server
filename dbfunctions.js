@@ -19,5 +19,26 @@ module.exports = {
 	        	callback();
 	      	}
 	   });
+	},
+
+	newId : function(db, collection, callback){
+		var newId = 0;
+		var cursor =  db.collection(collection).find().sort({$natural:-1}).limit(1);
+		cursor.each(function(err, doc) {
+			if(err) {console.error(err);}
+			if (doc !== null) {
+				if(!doc.id){
+					//console.log(1);
+					newId = 1;
+				} else {
+					//console.log(doc.id + 1);
+					newId = doc.id;
+				}
+			} else {
+				callback();
+			}
+			
+			console.log('newIdFunc1' + newId);
+		});
 	}
 };
