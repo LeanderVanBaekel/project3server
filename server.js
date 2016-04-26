@@ -7,10 +7,9 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
+var MongoClient = require('mongodb');
 
-
-var MongoClient = require('mongodb').MongoClient
-    , format = require('util').format;
+MongoClient.MongoClient, format = require('util').format;
 MongoClient.connect('mongodb://127.0.0.1:27017/project3db', function (err, db) {
     if (err) {
         throw err;
@@ -19,11 +18,6 @@ MongoClient.connect('mongodb://127.0.0.1:27017/project3db', function (err, db) {
     }
     db.close();
 });
-
-// var mongoose = require('mongoose');
-// mongoose.connect('mongodb://api.leandervanbaekel.nl');
-// mongoose.connect('mongodb://root:mudkippers8@37.139.27.8:27017');
-// console.log(mongoose.connection.readyState);
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -36,29 +30,19 @@ var port = process.env.PORT || 8080;        // set our port
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
-router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+app.get('/', function(req, res){
+  res.json({ message: 'hooray! welcome to our api!' });   
 });
 
-router.route('/esp')
-	.get(function(req, res) {
-		res.json({message : 'Trying to GET esp data'});
-	})
-	.post(function(req, res) {
-		res.json({message : 'Trying to POST esp data'});
-	});
+var espRouter = require('./routes/esp');
+app.use('/esp', espRouter);
 
-router.route('/esp/:id')
-	.get(function(req, res) {
-		var values = req.params.id;
-		res.json({message : 'Trying to GET esp data with id: ' + req.params.id});
-	})
-	.post(function(req, res) {
-		res.json({message : 'Trying to POST esp data with id: ' + req.params.id});
-	});
+var userInputRouter = require('./routes/userInput');
+app.use('/user-input', userInputRouter);
 
 // more routes for our API will happen here
-app.use('/', router);
+
+
 
 // START THE SERVER
 // =============================================================================
