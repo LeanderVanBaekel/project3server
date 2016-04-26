@@ -14,7 +14,7 @@
 
 ##POST Requests:
 - **/alarm/new/esp1 or /esp2** Insert new alarm
-- **/alarm/update/:id
+- **/alarm/update/:id**
 
 ## Get van gemeente
 
