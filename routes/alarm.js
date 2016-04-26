@@ -14,11 +14,13 @@ mongoose.connect(url); // connect to our database
 router.route('/')
 	.get(function(req, res) {
 		res.json({message : 'Trying to GET userinput'});
-	})
+	});
+
+router.route('/new/:esp')
 	.post(function(req, res) {
         
         var alarm = new Alarm();      // create a new instance of the Bear model
-        alarm.id = req.params.id;  // set the bears name (comes from the request)
+        alarm.location = req.params.esp;  // set the bears name (comes from the request)
         alarm.date = new Date();
         alarm.status = null;
 
