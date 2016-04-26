@@ -37,6 +37,20 @@ router.route('/new/:esp')
 	// 	res.json({message : 'Trying to POST userinput'});
 	// });
 
+router.route('/update/:id')
+    .get(function(req, res){
+        var query = Alarm.findOne({ '_id' : req.params.id });
+
+        query.exec(function(err, alarms){
+            if (err){
+                res.send(err);
+            }
+
+            console.log(alarms);
+            res.json(alarms);
+        });
+    });
+
 router.route('/all')
 	.get(function(req, res) {
 		var values = req.params.id;
