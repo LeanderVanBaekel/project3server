@@ -20,7 +20,7 @@ var findShit = function(db, collection, query, callback) {
    });
 }
 
-
+  
 
 router.route('/:id')
 	.get(function(req, res) {
