@@ -15,25 +15,12 @@ router.route('/')
 	.get(function(req, res) {
 		res.json({message : 'Trying to GET userinput'});
 	});
-	// .post(function(req, res) {
-	// 	res.json({message : 'Trying to POST userinput'});
-	// });
 
-router.route('/:id')
-	.get(function(req, res) {
-		var values = req.params.id;
-		Alarm.find(function(err, alarms) {
-            if (err){
-                res.send(err);
-            }
-
-            res.json(alarms);
-        });
-	})
+router.route('/new/:esp')
 	.post(function(req, res) {
         
         var alarm = new Alarm();      // create a new instance of the Bear model
-        alarm.id = req.params.id;  // set the bears name (comes from the request)
+        alarm.location = req.params.esp;  // set the bears name (comes from the request)
         alarm.date = new Date();
         alarm.status = null;
 
@@ -46,7 +33,35 @@ router.route('/:id')
         });
         
     });
+	// .post(function(req, res) {
+	// 	res.json({message : 'Trying to POST userinput'});
+	// });
 
+router.route('/all')
+	.get(function(req, res) {
+		var values = req.params.id;
+		Alarm.find(function(err, alarms) {
+            if (err){
+                res.send(err);
+            }
 
+            console.log(alarms);
+            res.json(alarms);
+        });
+	});
+
+router.route('/latest')
+	.get(function(req, res){
+		var query = Alarm.find().sort({date: -1}).limit(1);
+
+		query.exec(function(err, alarms){
+			if (err){
+                res.send(err);
+            }
+
+            console.log(alarms);
+            res.json(alarms);
+		});
+	});
 
 module.exports = router;
