@@ -3,13 +3,15 @@ var Schema       = mongoose.Schema;
 
 var activity  = new Schema({
 	location: String,
-	value: Number,
+	street: String,
+	value: Number, // activity value 1/10
     day : Number,
     month : Number,
     year : Number,
     hour : Number,
     time: String,
-    status : Boolean
+    alarm : Boolean, // true is alarm fired
+    createdOn : Date
 });
 
 module.exports = mongoose.model('Activity', activity);
