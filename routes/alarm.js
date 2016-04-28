@@ -120,38 +120,58 @@ router.route('/day/:day/:month/:year')
         });
     });
 
-router.route('/day/:day/:month/:year/esp1')
+router.route('/day/:day/:month/:year/:esp')
     .get(function(req, res){
-        var day = req.params.day;
-        var month = req.params.month;
-        var year = req.params.year;
+        if(req.params.esp === 'esp1' || req.params.esp === 'esp2'){
+            var day = req.params.day;
+            var month = req.params.month;
+            var year = req.params.year;
+            var esp = req.params.esp;
 
-        var query = Alarm.find({"day": day, "month": month, "year": year, location: 'esp1'});
-        query.exec(function(err, alarms){
-            if (err){
-                res.send(err);
-            }
+            var query = Alarm.find({"day": day, "month": month, "year": year, location: esp});
+            query.exec(function(err, alarms){
+                if (err){
+                    res.send(err);
+                }
 
-            console.log(alarms);
-            res.json(alarms);
-        });
+                console.log(alarms);
+                res.json(alarms);
+            });
+        } else {
+            res.json({ message: 'Alarm not created! ' + req.params.esp + ' is not a valid location'  });
+        }
     });
 
-router.route('/day/:day/:month/:year/esp2')
+router.route('/day/:day/:month/:year/:esp/:value')
     .get(function(req, res){
-        var day = req.params.day;
-        var month = req.params.month;
-        var year = req.params.year;
+        if(req.params.esp === 'esp1' || req.params.esp === 'esp2'){
+            if(req.params.value === 'true' || req.params.value === 'false' || req.params.value === 'null'){
+                var day = req.params.day;
+                var month = req.params.month;
+                var year = req.params.year;
+                var esp = req.params.esp;
+                var value;
+                if (req.params.value === 'true') {
+                    value = true;
+                } else if (req.params.value === 'false') {
+                    value = false;
+                }   else {
+                    value = null;
+                }
 
-        var query = Alarm.find({"day": day, "month": month, "year": year, location: 'esp2'});
-        query.exec(function(err, alarms){
-            if (err){
-                res.send(err);
+                var query = Alarm.find({"day": day, "month": month, "year": year, location: esp, status: value});
+                query.exec(function(err, alarms){
+                    if (err){
+                        res.send(err);
+                    }
+
+                    console.log(alarms);
+                    res.json(alarms);
+                });
             }
-
-            console.log(alarms);
-            res.json(alarms);
-        });
+        } else {
+            res.json({ message: 'Alarm not created! ' + req.params.esp + ' is not a valid location'  });
+        }
     });
 
 router.route('/month/:month/:year')
@@ -170,37 +190,56 @@ router.route('/month/:month/:year')
         });
     });
 
-router.route('/month/:month/:year/esp1')
+router.route('/month/:month/:year/:esp')
     .get(function(req, res){
-        var month = req.params.month;
-        var year = req.params.year;
+        if(req.params.esp === 'esp1' || req.params.esp === 'esp2'){
+            var month = req.params.month;
+            var year = req.params.year;
+            var esp = req.params.esp;
+            
+            var query = Alarm.find({"month": month, "year": year, location: esp});
+            query.exec(function(err, alarms){
+                if (err){
+                    res.send(err);
+                }
 
-        var query = Alarm.find({"month": month, "year": year, location: 'esp1'});
-        query.exec(function(err, alarms){
-            if (err){
-                res.send(err);
-            }
-
-            console.log(alarms);
-            res.json(alarms);
-        });
+                console.log(alarms);
+                res.json(alarms);
+            });
+        } else {
+            res.json({ message: 'Alarm not created! ' + req.params.esp + ' is not a valid location'  });
+        }
     });
 
-
-router.route('/month/:month/:year/esp2')
+router.route('/month/:month/:year/:esp/:value')
     .get(function(req, res){
-        var month = req.params.month;
-        var year = req.params.year;
+        if(req.params.esp === 'esp1' || req.params.esp === 'esp2'){
+            if(req.params.value === 'true' || req.params.value === 'false' || req.params.value === 'null'){
+                var month = req.params.month;
+                var year = req.params.year;
+                var esp = req.params.esp;
+                var value;
+                if (req.params.value === 'true') {
+                    value = true;
+                } else if (req.params.value === 'false') {
+                    value = false;
+                }   else {
+                    value = null;
+                }
 
-        var query = Alarm.find({"month": month, "year": year, location: 'esp2'});
-        query.exec(function(err, alarms){
-            if (err){
-                res.send(err);
+                var query = Alarm.find({"month": month, "year": year, location: esp, status: value});
+                query.exec(function(err, alarms){
+                    if (err){
+                        res.send(err);
+                    }
+
+                    console.log(alarms);
+                    res.json(alarms);
+                });
             }
-
-            console.log(alarms);
-            res.json(alarms);
-        });
+        } else {
+            res.json({ message: 'Alarm not created! ' + req.params.esp + ' is not a valid location'  });
+        }
     });
 
 router.route('/year/:year')
@@ -218,36 +257,55 @@ router.route('/year/:year')
         });
     });
     
-router.route('/year/:year/esp1')
+router.route('/year/:year/:esp')
     .get(function(req, res){
-        var year = req.params.year;
+        if(req.params.esp === 'esp1' || req.params.esp === 'esp2'){
+            var year = req.params.year;
+            var esp = req.params.esp;
 
-        var query = Alarm.find({"year": year, location: 'esp1'});
-        query.exec(function(err, alarms){
-            if (err){
-                res.send(err);
-            }
+            var query = Alarm.find({"year": year, location: esp1});
+            query.exec(function(err, alarms){
+                if (err){
+                    res.send(err);
+                }
 
-            console.log(alarms);
-            res.json(alarms);
-        });
+                console.log(alarms);
+                res.json(alarms);
+            });
+        } else {
+            res.json({ message: 'Alarm not created! ' + req.params.esp + ' is not a valid location'  });
+        }
     });
 
-router.route('/year/:year/esp2')
+router.route('/year/:year/:esp/:value')
     .get(function(req, res){
-        var year = req.params.year;
+        if(req.params.esp === 'esp1' || req.params.esp === 'esp2'){
+            if(req.params.value === 'true' || req.params.value === 'false' || req.params.value === 'null'){
+                var year = req.params.year;
+                var esp = req.params.esp;
+                var value;
+                if (req.params.value === 'true') {
+                    value = true;
+                } else if (req.params.value === 'false') {
+                    value = false;
+                }   else {
+                    value = null;
+                }
 
-        var query = Alarm.find({"year": year, location: 'esp2'});
-        query.exec(function(err, alarms){
-            if (err){
-                res.send(err);
+                var query = Alarm.find({"year": year, location: esp, status: value});
+                query.exec(function(err, alarms){
+                    if (err){
+                        res.send(err);
+                    }
+
+                    console.log(alarms);
+                    res.json(alarms);
+                });
             }
-
-            console.log(alarms);
-            res.json(alarms);
-        });
+        } else {
+            res.json({ message: 'Alarm not created! ' + req.params.esp + ' is not a valid location'  });
+        }
     });
-
 
 router.route('/:id')
     .get(function(req, res) {
@@ -261,5 +319,5 @@ router.route('/:id')
             res.json(alarms);
         });
     });
-    
+
 module.exports = router;
