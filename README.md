@@ -63,3 +63,22 @@ All :value parameters here have to be, true, false or null
 ## Averages
 
 /average/
+
+
+## Activity
+
+Activity is measured on a scale from 1 to 10. When the activity is 6 or hire an alarm is fired. The activity is the everage of 5 minutes of data.
+
+### GET Requests:
+- **activity/day/:day/:month/:year/esp1 or /esp2** Get all the activity from the esp
+
+
+
+
+
+
+
+
+
+
+
