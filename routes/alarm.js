@@ -33,25 +33,29 @@ router.route('/:id')
 router.route('/new/:esp')
 	.post(function(req, res) {
         
-        var alarm = new Alarm();      // create a new instance of the Bear model
-        var date = new Date();
-        alarm.location = req.params.esp;  // set the bears name (comes from the request)
-        alarm.day = date.getDate();
-        alarm.month = date.getMonth() + 1;
-        alarm.year = date.getFullYear();
-        alarm.hour = date.getHours();
-        alarm.time = date.getHours() + ':' + date.getMinutes();
-        alarm.status = null;
-        alarm.createdOn = date;
+        if(req.params.esp === 'esp1' || req.params.esp === 'esp2'){
 
-        // save the bear and check for errors
-        alarm.save(function(err) {
-            if (err)
-                res.send(err);
+            var alarm = new Alarm();      // create a new instance of the Bear model
+            var date = new Date();
+            alarm.location = req.params.esp;  // set the bears name (comes from the request)
+            alarm.day = date.getDate();
+            alarm.month = date.getMonth() + 1;
+            alarm.year = date.getFullYear();
+            alarm.hour = date.getHours();
+            alarm.time = date.getHours() + ':' + date.getMinutes();
+            alarm.status = null;
+            alarm.createdOn = date;
 
-            res.json({ message: 'Alarm created!' + alarm });
-        });
-        
+            // save the bear and check for errors
+            alarm.save(function(err) {
+                if (err)
+                    res.send(err);
+
+                res.json({ message: 'Alarm created!' + alarm });
+            });
+        } else {
+            res.json({ message: 'Alarm not created! ' + req.params.esp + ' is not a valid location'  });
+        }        
     });
 	// .post(function(req, res) {
 	// 	res.json({message : 'Trying to POST userinput'});

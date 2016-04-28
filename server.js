@@ -34,13 +34,16 @@ app.get('/', function(req, res){
   res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+// more routes for our API will happen here
+
 var espRouter = require('./routes/esp');
 app.use('/esp', espRouter);
 
 var alarmRouter = require('./routes/alarm');
 app.use('/alarm', alarmRouter);
 
-// more routes for our API will happen here
+var alarmRouter = require('./routes/alarm');
+app.use('/alarm', alarmRouter);
 
 
 
