@@ -51,6 +51,11 @@ All date values are in numbers, years written in full ie. 2016, months written i
 - **/alarm/month/:month/:year/esp1 or /esp2** Get all the alarms per month, for location
 - **/alarm/year/:year/esp1 or /esp2** Get all the alarms per year, for location
 
+All :value parameters here have to be, true, false or null
+- **/alarm/day/:day/:month/:year/esp1/:value or /esp2/:value** Get all the alarms per day, for location for a specific status
+- **/alarm/month/:month/:year/esp1/:value or /esp2/:value** Get all the alarms per month, for location for a specific status.
+- **/alarm/year/:year/esp1/:value or /esp2:value** Get all the alarms per year, for location for a specific status
+
 ##POST Requests:
 - **/alarm/new/esp1 or /esp2** Insert new alarm
 - **/alarm/update/:id/:value** Value parameter has to be true, false or null
