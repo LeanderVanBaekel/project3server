@@ -18,14 +18,92 @@ mongoose.createConnection(url); // connect to our database
 var checkSuspicion = function(data, esp) {
 	var motion = [];
 	var motionAmount = 0;
+	var activity = 0;
+	var ldrAverage = 0;
+	var soundAverage = 0;
+
 	for (var i = data.length - 1; i >= 0; i--) {
 		motion.push(data[i].pir);
+		ldrAverage = ldrAverage + data[i].ldr;
+		soundAverage = soundAverage + data[i].sound;
 
 		if (data[i].pir > 0) {
 			motionAmount ++;
 		}
 	};
-	if (motionAmount > 15) {
+
+	////////////////////////////////////
+	
+	ldrAverage = ldrAverage / 30;
+	ldrAverage = ldrAverage / 100;
+	ldrAverage = Math.round(ldrAverage);
+	console.log("ldr amount: " + ldrAverage);
+
+	switch(ldrAverage) {	
+		case 10:
+		case 9:
+			activity = activity + 4;
+			break;
+		case 8:
+		case 7:
+			activity = activity + 2;
+			break;
+		case 6:
+		case 5:
+			activity = activity + 1;
+			break;
+	}
+
+	///////////////////////////////////
+
+	motionAmount = motionAmount / 3;
+	console.log("motion amount: " + motionAmount);
+
+	switch(motionAmount) {	
+		case 10:
+		case 9:
+			activity = activity + 4;
+			break;
+		case 8:
+		case 7:
+			activity = activity + 2;
+			break;
+		case 6:
+		case 5:
+			activity = activity + 1;
+			break;
+	}
+
+	/////////////////////////////////
+
+
+	soundAverage = soundAverage / 30;
+	soundAverage = soundAverage / 100;
+	soundAverage = Math.round(soundAverage);
+	console.log("sound amount: " + soundAverage);
+
+	switch(motionAmount) {	
+		case 10:
+		case 9:
+		case 8:
+		case 7:
+			activity = activity + 2;
+			break;
+		case 6:
+		case 5:
+		case 4:
+		case 3:
+			activity = activity + 1;
+			break;
+	}
+
+	/////////////////////////////////
+
+	console.log(activity);
+
+	
+
+	if (motionAmount > 5) {
 		ALARM(esp);
 	} 
 }
