@@ -71,7 +71,10 @@ var ALARM = function(esp) {
     });
 };
 
-setInterval(function(){getData("esp1");getData("esp2");},300000); 
+setInterval(function(){
+	getData("esp1");
+	getData("esp2");
+},300000); 
 
 // route to get data from the esp's
 router.route('/:id/:amount')
