@@ -3,6 +3,7 @@ var Schema       = mongoose.Schema;
 
 var alarm  = new Schema({
 	location: String,
+	street: String,
     day : Number,
     month : Number,
     year : Number,

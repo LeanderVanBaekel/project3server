@@ -18,7 +18,7 @@ mongoose.createConnection(url); // connect to our database
 var checkSuspicion = function(data, esp) {
 	var motion = [];
 	var motionAmount = 0;
-	var activity = 0;
+	var activityVal = 0;
 	var ldrAverage = 0;
 	var soundAverage = 0;
 
@@ -32,7 +32,7 @@ var checkSuspicion = function(data, esp) {
 		}
 	};
 
-	////////////////////////////////////
+	/////////////////light///////////////////
 	
 	ldrAverage = ldrAverage / 30;
 	ldrAverage = ldrAverage / 100;
@@ -42,19 +42,19 @@ var checkSuspicion = function(data, esp) {
 	switch(ldrAverage) {	
 		case 10:
 		case 9:
-			activity = activity + 4;
+			activityVal = activityVal + 4;
 			break;
 		case 8:
 		case 7:
-			activity = activity + 2;
+			activityVal = activityVal + 2;
 			break;
 		case 6:
 		case 5:
-			activity = activity + 1;
+			activityVal = activityVal + 1;
 			break;
 	}
 
-	///////////////////////////////////
+	////////////////motion///////////////////
 
 	motionAmount = motionAmount / 3;
 	console.log("motion amount: " + motionAmount);
@@ -62,19 +62,19 @@ var checkSuspicion = function(data, esp) {
 	switch(motionAmount) {	
 		case 10:
 		case 9:
-			activity = activity + 4;
+			activityVal = activityVal + 4;
 			break;
 		case 8:
 		case 7:
-			activity = activity + 2;
+			activityVal = activityVal + 2;
 			break;
 		case 6:
 		case 5:
-			activity = activity + 1;
+			activityVal = activityVal + 1;
 			break;
 	}
 
-	/////////////////////////////////
+	////////////////sound/////////////////
 
 
 	soundAverage = soundAverage / 30;
@@ -87,21 +87,47 @@ var checkSuspicion = function(data, esp) {
 		case 9:
 		case 8:
 		case 7:
-			activity = activity + 2;
+			activityVal = activityVal + 2;
 			break;
 		case 6:
 		case 5:
 		case 4:
 		case 3:
-			activity = activity + 1;
+			activityVal = activityVal + 1;
 			break;
 	}
 
 	/////////////////////////////////
 
-	console.log(activity);
 
-	
+	var activity = new Activity();
+	var date = new Date();
+    if (esp == 'esp1') {
+        activity.street = 'Voltaplein 53';
+        activity.location = 'esp1';  // set the bears name (comes from the request)
+    } else {
+        activity.street = 'Linnaeusparkweg 101';
+        activity.location = 'esp2';
+    }
+    activity.value = activityVal
+	activity.day = date.getDate();
+	activity.month = date.getMonth() + 1;
+	activity.year = date.getFullYear();
+	activity.hour = date.getHours();
+	activity.time = date.getHours() + ':' + date.getMinutes();
+	if (activityVal > 5) {
+        activity.alarm = true;  // set the bears name (comes from the request)
+    } else {
+        activity.alarm = false;
+    }	
+    activity.createdOn = new Date();
+
+    activity.save(function(err) {
+    	if (err)
+    		res.send(err);
+
+    	console.log("activity saved. Val = " + activityVal + ". ESP: " + esp);
+    });
 
 	if (motionAmount > 5) {
 		ALARM(esp);
@@ -124,36 +150,77 @@ var getData = function(esp) {
 
 // creating new alarm 
 var ALARM = function(esp) {
-    var alarm = new Alarm();
+    var alarm = new Alarm();      // create a new instance of the Bear model
     var date = new Date();
-    alarm.location = esp;  
-	alarm.day = date.getDate();
+    if (esp == 'esp1') {
+        alarm.street = 'Voltaplein 53';
+        alarm.location = 'esp1';  // set the bears name (comes from the request)
+    } else {
+        alarm.street = 'Linnaeusparkweg 101';
+        alarm.location = 'esp2';
+    }
+    alarm.day = date.getDate();
     alarm.month = date.getMonth() + 1;
     alarm.year = date.getFullYear();
     alarm.hour = date.getHours();
     alarm.time = date.getHours() + ':' + date.getMinutes();
     alarm.status = null;
-    alarm.createdOn = date;
+    alarm.createdOn = new Date();
 
     // save the bear and check for errors
     alarm.save(function(err) {
         if (err)
             res.send(err);
 
-        console.log({ message: 'Alarm created!' + alarm });
+        res.json({ message: 'Alarm created!' + alarm });
     });
 };
 
 setInterval(function(){
 	getData("esp1");
 	getData("esp2");
-},10000); 
+},300000); 
 
 
 
-router.route('/')
-	.get(function(req, res) {
+router.route('/day/:day/:month/:year/:esp')
+    .get(function(req, res){
+        if(req.params.esp === 'esp1' || req.params.esp === 'esp2'){
+            var day = req.params.day;
+            var month = req.params.month;
+            var year = req.params.year;
+            var esp = req.params.esp;
 
+            var query = Activity.find({"day": day, "month": month, "year": year, "location": esp});
+            query.exec(function(err, data){
+                if (err){
+                    res.send(err);
+                }
+                res.json(data);
+            });
+        } else {
+            res.json({ message: 'data not found! ' + req.params.esp + ' is not a valid location'  });
+        }	
 	});
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
