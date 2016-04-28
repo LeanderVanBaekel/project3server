@@ -3,8 +3,12 @@ var Schema       = mongoose.Schema;
 
 var alarm  = new Schema({
 	location: String,
-    date : Date,
-    status : Boolean
+    day : Number,
+    month : Number,
+    year : Number,
+    time: String,
+    status : Boolean,
+    createdOn : Date
 });
 
 module.exports = mongoose.model('Alarm', alarm);
