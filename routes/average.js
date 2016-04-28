@@ -13,4 +13,9 @@ router.route('/')
 		res.json({message : 'Trying to GET userinput'});
 	});
 
+
+router.route('/hourly')
+	.get(function(req, res){
+	});
+
 module.exports = router;

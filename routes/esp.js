@@ -14,64 +14,9 @@ mongoose.createConnection(url); // connect to our database
 
 // TODO 
 // Crono? voor suspicion check
-// 
+// Activity 1/10
 
 
-// checking how often there was movement in the past 5 min
-var checkSuspicion = function(data, esp) {
-	var motion = [];
-	var motionAmount = 0;
-	for (var i = data.length - 1; i >= 0; i--) {
-		motion.push(data[i].pir);
-
-		if (data[i].pir > 0) {
-			motionAmount ++;
-		}
-	};
-	if (motionAmount > 15) {
-		ALARM(esp);
-	} 
-}
-
-// getting data to check for suspicion
-var getData = function(esp) {
-	var data;
-
-	var query = Esp1.find().sort({date: -1}).limit(30);
-	query.exec(function(err, res){
-		if (err){
-	        res.send(err);
-	    }
-	    data = res;
-	    checkSuspicion(data, esp);
-	});
-};
-
-getData("esp1");
-
-// creating new alarm 
-var ALARM = function(esp) {
-    var alarm = new Alarm();
-    var date = new Date();
-    alarm.location = esp;  
-	alarm.day = date.getDate();
-    alarm.month = date.getMonth() + 1;
-    alarm.year = date.getFullYear();
-    alarm.hour = date.getHours();
-    alarm.time = date.getHours() + ':' + date.getMinutes();
-    alarm.status = null;
-    alarm.createdOn = date;
-
-    // save the bear and check for errors
-    alarm.save(function(err) {
-        if (err)
-            res.send(err);
-
-        console.log({ message: 'Alarm created!' + alarm });
-    });
-};
-
-setInterval(function(){getData("esp1");getData("esp2");},300000); 
 
 // route to get data from the esp's
 router.route('/:id/:amount')
