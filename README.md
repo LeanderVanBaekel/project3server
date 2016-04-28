@@ -45,16 +45,16 @@ All date values are in numbers, years written in full ie. 2016, months written i
 
 - **/alarm/day/:day/:month/:year** Get all the alarms per day
 - **/alarm/month/:month/:year** Get all the alarms per month
-- **/alarm/:year** Get all the alarms per year
+- **/alarm/year/:year** Get all the alarms per year
 
 - **/alarm/day/:day/:month/:year/esp1 or /esp2** Get all the alarms per day, for location
 - **/alarm/month/:month/:year/esp1 or /esp2** Get all the alarms per month, for location
-- **/alarm/:year/esp1 or /esp2** Get all the alarms per year, for location
+- **/alarm/year/:year/esp1 or /esp2** Get all the alarms per year, for location
 
 ##POST Requests:
 - **/alarm/new/esp1 or /esp2** Insert new alarm
 - **/alarm/update/:id/:value** Value parameter has to be true, false or null
 
-## Get van gemeente
+## Averages
 
-/data/datarequest
+/average/
