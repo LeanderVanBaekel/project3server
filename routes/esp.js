@@ -51,23 +51,31 @@ getData("esp1");
 
 // creating new alarm 
 var ALARM = function(esp) {
-    var alarm = new Alarm();      
+    var alarm = new Alarm();
+    var date = new Date();
     alarm.location = esp;  
-    alarm.date = new Date();
+	alarm.day = date.getDate();
+    alarm.month = date.getMonth() + 1;
+    alarm.year = date.getFullYear();
+    alarm.hour = date.getHours();
+    alarm.time = date.getHours() + ':' + date.getMinutes();
     alarm.status = null;
+    alarm.createdOn = date;
 
+    // save the bear and check for errors
     alarm.save(function(err) {
         if (err)
             res.send(err);
 
-		console.log("Created new alarm");
+        console.log({ message: 'Alarm created!' + alarm });
     });
 };
+
+setInterval(function(){getData("esp1");getData("esp2");},300000); 
 
 // route to get data from the esp's
 router.route('/:id/:amount')
 	.get(function(req, res) {
-		getData("esp1");
 
 		var id = req.params.id;
 		var amount = req.params.amount;
