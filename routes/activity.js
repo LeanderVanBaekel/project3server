@@ -101,6 +101,8 @@ var checkSuspicion = function(data, esp) {
 
 	console.log(activity);
 
+	
+
 	if (motionAmount > 5) {
 		ALARM(esp);
 	} 
