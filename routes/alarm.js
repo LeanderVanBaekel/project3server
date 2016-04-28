@@ -24,7 +24,11 @@ router.route('/new/:esp')
 
             var alarm = new Alarm();      // create a new instance of the Bear model
             var date = new Date();
-            alarm.location = req.params.esp;  // set the bears name (comes from the request)
+            if (req.params.esp == 'esp1') {
+                alarm.location = 'Voltaplein 53';  // set the bears name (comes from the request)
+            } else {
+                alarm.location = 'Linnaeusparkweg 101';
+            }
             alarm.day = date.getDate();
             alarm.month = date.getMonth() + 1;
             alarm.year = date.getFullYear();

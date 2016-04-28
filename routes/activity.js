@@ -69,7 +69,7 @@ var ALARM = function(esp) {
 setInterval(function(){
 	getData("esp1");
 	getData("esp2");
-},300000); 
+},10000); 
 
 
 
