@@ -50,6 +50,8 @@ app.use('/alarm', alarmRouter);
 var averageRouter = require('./routes/average');
 app.use('/average', averageRouter);
 
+var activityRouter = require('./routes/activity');
+app.use('/activity', activityRouter);
 
 // START THE SERVER
 // =============================================================================
