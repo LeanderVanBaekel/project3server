@@ -23,6 +23,11 @@ MongoClient.connect('mongodb://127.0.0.1:27017/project3db', function (err, db) {
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
 
 var port = process.env.PORT || 8080;        // set our port
 
@@ -42,9 +47,8 @@ app.use('/esp', espRouter);
 var alarmRouter = require('./routes/alarm');
 app.use('/alarm', alarmRouter);
 
-var alarmRouter = require('./routes/alarm');
-app.use('/alarm', alarmRouter);
-
+var averageRouter = require('./routes/average');
+app.use('/average', averageRouter);
 
 
 // START THE SERVER

@@ -16,19 +16,6 @@ router.route('/')
 		res.json({message : 'Trying to GET userinput'});
 	});
 
-router.route('/:id')
-    .get(function(req, res) {
-        var query = Alarm.find({"_id": req.params.id});
-        query.exec(function(err, alarms){
-            if (err){
-                res.send(err);
-            }
-
-            console.log(alarms);
-            res.json(alarms);
-        });
-    });
-
 
 router.route('/new/:esp')
 	.post(function(req, res) {
@@ -44,7 +31,7 @@ router.route('/new/:esp')
             alarm.hour = date.getHours();
             alarm.time = date.getHours() + ':' + date.getMinutes();
             alarm.status = null;
-            alarm.createdOn = date;
+            alarm.createdOn = new Date();
 
             // save the bear and check for errors
             alarm.save(function(err) {
@@ -261,4 +248,18 @@ router.route('/year/:year/esp2')
         });
     });
 
+
+router.route('/:id')
+    .get(function(req, res) {
+        var query = Alarm.find({"_id": req.params.id});
+        query.exec(function(err, alarms){
+            if (err){
+                res.send(err);
+            }
+
+            console.log(alarms);
+            res.json(alarms);
+        });
+    });
+    
 module.exports = router;
