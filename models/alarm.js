@@ -6,6 +6,7 @@ var alarm  = new Schema({
     day : Number,
     month : Number,
     year : Number,
+    hour : Number,
     time: String,
     status : Boolean,
     createdOn : Date
