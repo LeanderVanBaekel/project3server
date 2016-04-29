@@ -21,6 +21,12 @@ MongoClient.connect('mongodb://127.0.0.1:27017/project3db', function (err, db) {
     db.close();
 });
 
+
+
+// global vars //
+// ==============================================================================
+settingsAlarmTrigger = 5;
+
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,6 +40,8 @@ app.use(function(req, res, next) {
 });
 
 var port = process.env.PORT || 8080;        // set our port
+
+
 
 // ROUTES FOR OUR API
 // =============================================================================
