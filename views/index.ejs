@@ -1,0 +1,66 @@
+<!-- HTML Generated from: http://dillinger.io/ -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Untitled Document.md</title></head><body id="preview">
+<h1><a id="Project_3__Server_0"></a>Project 3 - Server</h1>
+<p><a href="https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4">tutorial used</a></p>
+<h2><a id="ESP_data_4"></a>ESP data</h2>
+<h3><a id="GET_Requests_6"></a>GET Requests:</h3>
+<ul>
+<li><strong>/esp/:id/:amount</strong> <code>:id</code> is the esp you want to select. <code>:amount</code> is the amount of enteries you want to see.</li>
+</ul>
+<h3><a id="Post_Requests_9"></a>Post Requests:</h3>
+<ul>
+<li><strong>/esp/:id/:sensor1/:sensor2/:sensor3</strong>
+<code>:id</code> is the esp you are posting from. <code>:sensor1</code> is the sensor data from PIR. <code>:sensor2</code> is the sensor data from the ldr. <code>:sensor3</code> is the sound sensor data.</li>
+</ul>
+<h2><a id="Alarmen_13"></a>Alarmen</h2>
+<p>Values with a <code>:</code> are parameters, and can be edited.
+All date values are in numbers, years written in full ie. 2016, months written in numbers: 1 is January, 12 is December.</p>
+<h3><a id="GET_Requests_17"></a>GET Requests:</h3>
+<ul>
+<li><strong>/alarm/all</strong> Get all the documents in the collection</li>
+<li><strong>/alarm/:id</strong> Get alarm with specific id</li>
+<li><strong>/alarm/latest</strong> Get the latest document in the collection</li>
+</ul>
+<h4><a id="Alarms_by_date_22"></a>Alarms by date</h4>
+<ul>
+<li><strong>/alarm/day/:day/:month/:year</strong> By day</li>
+<li><strong>/alarm/month/:month/:year</strong> By month</li>
+<li><strong>/alarm/year/:year</strong> By year</li>
+</ul>
+<h4><a id="Alarms_by_date_by_lotcation_27"></a>Alarms by date, by lotcation</h4>
+<ul>
+<li><strong>/alarm/day/:day/:month/:year/esp1 or /esp2</strong> By day</li>
+<li><strong>/alarm/month/:month/:year/esp1 or /esp2</strong> By month</li>
+<li><strong>/alarm/year/:year/esp1 or /esp2</strong> By year</li>
+</ul>
+<h4><a id="Alarms_by_date_by_location_and_by_status_value_32"></a>Alarms by date, by location and by status value</h4>
+<p>Alarms have a status that is either <code>true</code>, <code>false</code> or <code>null</code>. To get results, <code>value</code> has to be one of those.</p>
+<ul>
+<li><strong>/alarm/day/:day/:month/:year/esp1/:value or /esp2/:value</strong> By day</li>
+<li><strong>/alarm/month/:month/:year/esp1/:value or /esp2/:value</strong> By month</li>
+<li><strong>/alarm/year/:year/esp1/:value or /esp2:value</strong>  By year</li>
+</ul>
+<h3><a id="POST_Requests_39"></a>POST Requests:</h3>
+<ul>
+<li><strong>/alarm/new/esp1 or /esp2</strong> Insert new alarm</li>
+<li><strong>/alarm/update/:id/:value</strong> Update alarm with specific id. Value parameter has to be true, false or null.</li>
+</ul>
+<h2><a id="Averages_43"></a>Averages</h2>
+<h3><a id="Get_Requests_45"></a>Get Requests:</h3>
+<ul>
+<li><strong>average/day/:esp/:day/:month/:year</strong> - Get an array with 23 objects representing all the hours, giving the average of the hour, of the specified day.</li>
+<li><strong>average/week/:esp/:day/:month/:year</strong> - Get an array of 7 days, calculated from the day provided in the query. Ie&gt; 7 april will get you april 7 to and with 13 april
+-<strong>average/month/:esp/:month/:year</strong> - Get an array of days, containing the average data per day for everyday of the specified month</li>
+</ul>
+<h2><a id="Activity_51"></a>Activity</h2>
+<p>Activity is measured on a scale from 1 to 10. When the activity is 6 or hire an alarm is fired. The activity is the everage of 5 minutes of data.</p>
+<h3><a id="GET_Requests_55"></a>GET Requests:</h3>
+<ul>
+<li><strong>activity/day/:day/:month/:year/esp1 or /esp2</strong> Get all the activity from the esp</li>
+</ul>
+<h3><a id="Changing_Alarm_trigger_58"></a>Changing Alarm trigger</h3>
+<ul>
+<li><strong><a href="http://api.leandervanbaekel.nl/settings">http://api.leandervanbaekel.nl/settings</a></strong> Enter the new value for the activity threshold.</li>
+</ul>
+
+</body></html>

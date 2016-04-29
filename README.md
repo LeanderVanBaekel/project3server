@@ -1,5 +1,5 @@
-# project3server
-
+# Project 3 - Server
+[Dashboard Repository](https://github.com/Wesleyvd/Dashboard)
 [tutorial used](https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4)
 
 ## ESP data
@@ -20,17 +20,17 @@ All date values are in numbers, years written in full ie. 2016, months written i
 - **/alarm/:id** Get alarm with specific id
 - **/alarm/latest** Get the latest document in the collection
 
-####Alarms by date
+#### Alarms by date
 - **/alarm/day/:day/:month/:year** By day
 - **/alarm/month/:month/:year** By month
 - **/alarm/year/:year** By year
 
-###Alarms by date, by lotcation
+#### Alarms by date, by lotcation
 - **/alarm/day/:day/:month/:year/esp1 or /esp2** By day
 - **/alarm/month/:month/:year/esp1 or /esp2** By month
 - **/alarm/year/:year/esp1 or /esp2** By year
 
-###Alarms by date, by location and by status value
+#### Alarms by date, by location and by status value
 Alarms have a status that is either `true`, `false` or `null`. To get results, `value` has to be one of those.
 
 - **/alarm/day/:day/:month/:year/esp1/:value or /esp2/:value** By day
@@ -43,7 +43,7 @@ Alarms have a status that is either `true`, `false` or `null`. To get results, `
 
 ## Averages
 
-###Get Requests:
+### Get Requests:
 
 - **average/day/:esp/:day/:month/:year** - Get an array with 23 objects representing all the hours, giving the average of the hour, of the specified day.
 - **average/week/:esp/:day/:month/:year** - Get an array of 7 days, calculated from the day provided in the query. Ie> 7 april will get you april 7 to and with 13 april
@@ -55,3 +55,6 @@ Activity is measured on a scale from 1 to 10. When the activity is 6 or hire an 
 
 ### GET Requests:
 - **activity/day/:day/:month/:year/esp1 or /esp2** Get all the activity from the esp
+
+### Changing Alarm trigger
+- **http://api.leandervanbaekel.nl/settings** Enter the new value for the activity threshold. 
