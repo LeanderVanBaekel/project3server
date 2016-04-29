@@ -15,7 +15,13 @@ router.route('/')
 
 router.route('/uploaden')
 	.post(function(req, res) {
-		res.send("done");
+		if (req.body.newVal >= 0 && req.body.newVal <= 10) {
+			settingsAlarmTrigger = req.body.newVal;
+			res.send("done, new value is: " + settingsAlarmTrigger);
+		} else {
+			res.send(req.body.newVal + " is not a value between 0 and 10!")
+		}
+
 	});
 
 module.exports = router;
