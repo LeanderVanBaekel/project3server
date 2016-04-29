@@ -37,7 +37,6 @@ var checkSuspicion = function(data, esp) {
 	ldrAverage = ldrAverage / 30;
 	ldrAverage = ldrAverage / 100;
 	ldrAverage = Math.round(ldrAverage);
-	console.log("ldr amount: " + ldrAverage);
 
 	switch(ldrAverage) {	
 		case 10:
@@ -57,7 +56,6 @@ var checkSuspicion = function(data, esp) {
 	////////////////motion///////////////////
 
 	motionAmount = motionAmount / 3;
-	console.log("motion amount: " + motionAmount);
 
 	switch(motionAmount) {	
 		case 10:
@@ -80,7 +78,6 @@ var checkSuspicion = function(data, esp) {
 	soundAverage = soundAverage / 30;
 	soundAverage = soundAverage / 100;
 	soundAverage = Math.round(soundAverage);
-	console.log("sound amount: " + soundAverage);
 
 	switch(motionAmount) {	
 		case 10:
@@ -125,13 +122,9 @@ var checkSuspicion = function(data, esp) {
     activity.save(function(err) {
     	if (err)
     		res.send(err);
-
-    	console.log("activity saved. Val = " + activityVal + ". ESP: " + esp);
     });
 
-    console.log("hoi" + activityVal + settingsAlarmTrigger);
 	if (activityVal >= settingsAlarmTrigger) {
-		console.log("ALARM2312");
 		ALARM(esp);
 	} 
 }
