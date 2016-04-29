@@ -50,26 +50,27 @@ router.route('/new/:esp')
 
 
 router.route('/update/:id/:value')
-    .get(function(req, res){
+    .post(function(req, res){
         var value = req.params.value;
+        var query = {'_id':req.params.id};
+
 
         if(value == 'true'){
-            Alarm.update(
-                { '_id': req.params.id  },
-                { $set: { "status": true } }
-            );
+            Alarm.findOneAndUpdate(query, { $set: { "status": true } }, function(err, doc){
+                if (err) return res.send(500, { error: err });
+            });
+
             res.json('Alarm ' + req.params.id + ' updated with status: true');   
         } else if (value == 'false'){
-            Alarm.update(
-                { '_id': req.params.id  },
-                { $set: { "status": false } }
-            );
+
+            Alarm.findOneAndUpdate(query, { $set: { "status": false } }, function(err, doc){
+                if (err) return res.send(500, { error: err });
+            });
             res.json('Alarm ' + req.params.id + ' updated with status: false');
         } else if (value == 'null'){
-            Alarm.update(
-                { '_id': req.params.id  },
-                { $set: { "status": null } }
-            );
+            Alarm.findOneAndUpdate(query, { $set: { "status": null } }, function(err, doc){
+                if (err) return res.send(500, { error: err });
+            });
             res.json('Alarm ' + req.params.id + ' updated with status: null');
         } else {            
             res.json('Not a valid value. Alarm not updated');
