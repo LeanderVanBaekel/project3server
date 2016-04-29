@@ -52,6 +52,8 @@ router.route('/new/:esp')
 router.route('/update/:id/:value')
     .post(function(req, res){
         var value = req.params.value;
+        var query = {'_id':req.params.id};
+
 
         if(value == 'true'){
             Alarm.findOneAndUpdate(query, { $set: { "status": true } }, function(err, doc){
