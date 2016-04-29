@@ -267,7 +267,7 @@ router.route('/year/:year/:esp')
             var year = req.params.year;
             var esp = req.params.esp;
 
-            var query = Alarm.find({"year": year, location: esp1});
+            var query = Alarm.find({"year": year, location: req.params.esp});
             query.exec(function(err, alarms){
                 if (err){
                     res.send(err);
