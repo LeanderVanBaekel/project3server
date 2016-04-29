@@ -1,16 +1,17 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
-var alarm  = new Schema({
+var activity  = new Schema({
 	location: String,
 	street: String,
+	value: Number, // activity value 1/10
     day : Number,
     month : Number,
     year : Number,
     hour : Number,
     time: String,
-    status : Boolean,
+    alarm : Boolean, // true is alarm fired
     createdOn : Date
 });
 
-module.exports = mongoose.model('Alarm', alarm);
+module.exports = mongoose.model('Activity', activity);
