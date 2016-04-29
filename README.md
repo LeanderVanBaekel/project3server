@@ -48,7 +48,9 @@ All :value parameters here have to be, true, false or null
 
 ## Averages
 
-/average/
+##Get Requests:
+
+- **average/day/:esp/:day/:month/:year** - Get an array with 23 objects representing all the hours, giving the average of the hour.
 
 
 ## Activity

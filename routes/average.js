@@ -11,11 +11,7 @@ var Averages = require('../models/average.js');
 
 mongoose.createConnection(url); // connect to our database
 
-router.route('/')
-	.get(function(req, res) {
-		res.json({message : 'Trying to GET userinput'});
-	});
-
+var dataHours = [];
 
 router.route('/day/:esp/:day/:month/:year')
 	.get(function(req, res){
@@ -25,33 +21,74 @@ router.route('/day/:esp/:day/:month/:year')
 		var year = req.params.year;
 		var query;
 
-		var beginDate = new Date(year, month, day, 0, 0, 0);
-		var endDate = new Date(year, month, day, 23, 59, 59);
+		for(hour = 0; hour < 23; hour++){
+			var beginDate = new Date(year, month, day, hour);
+			var endDate = new Date(year, month, day, hour, 59, 59);
 
-		if(location === 'esp1'){
-			query = Esp1.find({
-				date: {
-					$gte: beginDate,
-					$lte: endDate
-				}
-			});	
-		} else if (location === 'esp2'){
-			query = Esp2.find({
-				date: {
-					$gte: beginDate,
-					$lte: endDate
-				}
-			});	
-		} else {
-			res.json({message : 'Trying to GET userinput'});
-			return;
+			findByTime(location, beginDate, endDate, hour);
 		}
-
-		query.exec(function(err, data){
-			res.json(data);
-		});
-
+		res.json(dataHours);
 
 	});
 
+function findByTime(location, begin, end, hour){
+	if(location === 'esp1'){
+		query = Esp1.find({
+			date: {
+				$gte: begin,
+				$lte: end
+			}
+		});
+	} else if (location === 'esp2'){
+		query = Esp2.find({
+			date: {
+				$gte: begin,
+				$lte: end
+			}
+		});	
+	} else {
+		res.json({message : 'Not a valid location'});
+	}
+
+	query.exec(function(err, data){
+
+
+		if(data.length > 0){
+			console.log(data);
+			//dataHours.push(data);
+			var pirTotal = 0;
+			var length = 0;
+			var ldrTotal = 0;
+			var soundTotal = 0;
+			var averagePir, averageLdr, averageSound;
+
+			data.forEach(function(element, index){
+				console.log('element pir: '+element.pir);
+				pirTotal += element.pir;
+				ldrTotal += element.ldr;
+				soundTotal += element.sound;
+
+				length++;
+			});
+
+			averagePir = pirTotal / length;
+			averageLdr = ldrTotal / length;
+			averageSound = soundTotal / length;
+
+
+			obj = {
+				pir: averagePir,
+				ldr: averageLdr,
+				sound: averageSound
+			};
+
+			dataHours[hour] = obj;			
+		} else {
+			dataHours[hour] = {};
+		}
+
+
+
+	});	
+}
 module.exports = router;
