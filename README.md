@@ -71,3 +71,8 @@ Daarna heb ik de settings pagina gemaakt zodat de alarm meldingen makkelijk afge
 
 # Maaike: wat heb ik gedaan?
 
+Ik ben begonnen met het opzetten van de alarmen, hoe ze worden aangemaakt en hoe we ze kunnen vinden in de database en updaten.
+
+Verder ben ik aan de 'average' calls, hiermee kan de gebruiker de gemiddelde van een dag, week of maand opvragen.
+
+Als laatste heb ik een index pagina met informatie, een klein beetje css en een mudkip toegevoegt. 
