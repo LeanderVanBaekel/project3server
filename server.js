@@ -11,6 +11,7 @@ var MongoClient = require('mongodb');
 var path        = require('path');
 
 
+//make a connection with the database
 MongoClient.MongoClient, format = require('util').format;
 MongoClient.connect('mongodb://127.0.0.1:27017/project3db', function (err, db) {
     if (err) {
@@ -23,7 +24,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/project3db', function (err, db) {
 
 
 
-// global vars //
+// global vars (no var declaration)
 // ==============================================================================
 settingsAlarmTrigger = 5;
 
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(function(req, res, next) {
+    //make sure that people can get and post data by allowing cross origin
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
@@ -52,9 +54,8 @@ app.get('/', function(req, res){
 });
 
 // more routes for our API will happen here
-
 var espRouter = require('./routes/esp');
-app.use('/esp', espRouter);
+app.use('/esp', espRouter); 
 
 var alarmRouter = require('./routes/alarm');
 app.use('/alarm', alarmRouter);
