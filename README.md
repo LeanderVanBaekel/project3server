@@ -5,10 +5,11 @@
 ## ESP data
 
 ### GET Requests:
-- **/esp/:id/:amount** :id = esp you want to select. :amount = amount of enterys you want to see.
+- **/esp/:id/:amount** `:id` is the esp you want to select. `:amount` is the amount of enteries you want to see.
 
 ### Post Requests:
-**/esp/:id/:sensor1/:sensor2/:sensor3** :id = esp you are posting from. :sensor1 = sensor data PIR. :sensor2 = sensor data ldr. :sensor3 = sound sensor data 
+- **/esp/:id/:sensor1/:sensor2/:sensor3** 
+`:id` is the esp you are posting from. `:sensor1` is the sensor data from PIR. `:sensor2` is the sensor data from the ldr. `:sensor3` is the sound sensor data.
 
 ## Alarmen
 Values with a `:` are parameters, and can be edited.
