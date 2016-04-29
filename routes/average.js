@@ -11,25 +11,32 @@ var Averages = require('../models/average.js');
 
 mongoose.createConnection(url); // connect to our database
 
+//create a global array where I can save data to
 var dataTime = [];
 
+//route to get the averages of the day
 router.route('/day/:esp/:day/:month/:year')
 	.get(function(req, res){
+		//make the url parameters in to variables
 		var location = req.params.esp;
 		var day = req.params.day;
+		//substract 1 from the month to make it fit the javascript date format, where 0 is january
 		var month = req.params.month - 1;
 		var year = req.params.year;
 		var query;
 
+		//for loop that loops over all the ours of the day
 		for(hour = 0; hour < 23; hour++){
 			var beginDate = new Date(year, month, day, hour);
 			var endDate = new Date(year, month, day, hour, 59, 59);
 
 			findByTime(location, beginDate, endDate, hour);
 		}
+		//return the data found
 		res.json(dataTime);
 	});
 
+//same format as the above, only with days instead of hours
 router.route('/week/:esp/:day/:month/:year')
 	.get(function(req, res){
 		var location = req.params.esp;
@@ -41,6 +48,8 @@ router.route('/week/:esp/:day/:month/:year')
 		var endDate = new Date(year, month, startDay, 23, 59);
 
 		for(day = 0; day < 7; day++){
+			// if we remove the if statement it skips the day the user put in and starts at the next one
+			// ie. enter april 7, data would start at april 8 
 			if(day !== 0){
 				beginDate.setDate(beginDate.getDate() + 1);
 				endDate.setDate(endDate.getDate() + 1);	
@@ -50,9 +59,11 @@ router.route('/week/:esp/:day/:month/:year')
 		res.json(dataTime);
 	});
 
+//get averages from a month
 router.route('/month/:esp/:month/:year')
 	.get(function(req, res){
 		var location = req.params.esp;
+		//all months start at 1
 		var startDay = 1;
 		var month = req.params.month - 1;
 		var year = req.params.year;
@@ -60,6 +71,7 @@ router.route('/month/:esp/:month/:year')
 		var beginDate = new Date(year, month, startDay, 0, 0);
 		var endDate = new Date(year, month, startDay, 23, 59);
 
+		//switch to see what the end date is of a month
 		switch (month) {
 			case 0: //janurary
 			case 2: //march
@@ -77,7 +89,7 @@ router.route('/month/:esp/:month/:year')
 		    	endDay = 30;
 		    	break;
 		    case 1: //febuary
-		    	if(year % 4 === 0){
+		    	if(year % 4 === 0){ //if leap year
 		    		endDay = 29;
 		    	} else {
 		    		endDay = 28;
@@ -94,6 +106,7 @@ router.route('/month/:esp/:month/:year')
 	});
 
 function findByTime(location, begin, end, time){
+	//check the location
 	if(location === 'esp1'){
 		query = Esp1.find({
 			date: {
@@ -114,6 +127,7 @@ function findByTime(location, begin, end, time){
 
 	query.exec(function(err, data){
 
+		//if there is data to be found, calculate the average per value
 		if(data.length > 0){
 
 			var pirTotal = 0;
@@ -122,6 +136,7 @@ function findByTime(location, begin, end, time){
 			var soundTotal = 0;
 			var averagePir, averageLdr, averageSound;
 
+			//loop over all the objects in data array
 			data.forEach(function(element, index){
 				pirTotal += element.pir;
 				ldrTotal += element.ldr;
