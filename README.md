@@ -11,7 +11,7 @@
 - **/esp/:id/:sensor1/:sensor2/:sensor3** 
 `:id` is the esp you are posting from. `:sensor1` is the sensor data from PIR. `:sensor2` is the sensor data from the ldr. `:sensor3` is the sound sensor data.
 
-## Alarmen
+## Alarms
 Values with a `:` are parameters, and can be edited.
 All date values are in numbers, years written in full ie. 2016, months written in numbers: 1 is January, 12 is December.
 
@@ -58,3 +58,16 @@ Activity is measured on a scale from 1 to 10. When the activity is 6 or hire an 
 
 ### Changing Alarm trigger
 - **http://api.leandervanbaekel.nl/settings** Enter the new value for the activity threshold. 
+
+---
+
+# Leander: wat heb ik gedaan?
+
+Ik ben begonnen met het stuk van de communicatie van de ESP. Ik heb er voor gezorgd dat de ESP's de data kunnen posten naar onze api en dat deze data wordt opgeslagen in een mongo database.
+
+Vervolgens ben ik deze data gaan omreken in een 'cijfer' zodat er een waarde van 0 tot 10 zodat de data makkelijk leesbaar is.
+
+Daarna heb ik de settings pagina gemaakt zodat de alarm meldingen makkelijk afgesteld kunnen worden.
+
+# Maaike: wat heb ik gedaan?
+
