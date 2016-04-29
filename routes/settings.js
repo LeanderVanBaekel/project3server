@@ -13,4 +13,9 @@ router.route('/')
 		res.render('./settings', {data: data});
 	});
 
+router.route('/uploaden')
+	.post(function(req, res) {
+		res.send("done");
+	});
+
 module.exports = router;
