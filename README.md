@@ -30,7 +30,7 @@ All date values are in numbers, years written in full ie. 2016, months written i
 - **/alarm/month/:month/:year/esp1 or /esp2** By month
 - **/alarm/year/:year/esp1 or /esp2** By year
 
-##Alarms by date, by location and by status value
+###Alarms by date, by location and by status value
 Alarms have a status that is either `true`, `false` or `null`. To get results, `value` has to be one of those.
 
 - **/alarm/day/:day/:month/:year/esp1/:value or /esp2/:value** By day
