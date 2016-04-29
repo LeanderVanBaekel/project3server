@@ -9,9 +9,9 @@
         <h1><%= data.title%></h1>
 
 		<p>settingsAlarmTrigger is now <%= data.settingsAlarmTrigger%></p>
-        <form action="<%= data.req.baseUrl + "uploaden" %>" method="post">
+        <form action="/settings/uploaden" method="post">
         	<label for="value">Value</label>
-        	<input type="number">
+        	<input name="newVal" type="number">
 	  		<button>Updaten</button>
         </form>
     </main>
