@@ -85,7 +85,6 @@ router.route('/all')
                 res.send(err);
             }
 
-            console.log(alarms);
             res.json(alarms);
         });
 	});
@@ -99,7 +98,6 @@ router.route('/latest')
                 res.send(err);
             }
 
-            console.log(alarms);
             res.json(alarms);
 		});
 	});
@@ -116,7 +114,6 @@ router.route('/day/:day/:month/:year')
                 res.send(err);
             }
 
-            console.log(alarms);
             res.json(alarms);
         });
     });
@@ -135,7 +132,6 @@ router.route('/day/:day/:month/:year/:esp')
                     res.send(err);
                 }
 
-                console.log(alarms);
                 res.json(alarms);
             });
         } else {
@@ -166,7 +162,6 @@ router.route('/day/:day/:month/:year/:esp/:value')
                         res.send(err);
                     }
 
-                    console.log(alarms);
                     res.json(alarms);
                 });
             }
@@ -185,8 +180,6 @@ router.route('/month/:month/:year')
             if (err){
                 res.send(err);
             }
-
-            console.log(alarms);
             res.json(alarms);
         });
     });
@@ -204,7 +197,6 @@ router.route('/month/:month/:year/:esp')
                     res.send(err);
                 }
 
-                console.log(alarms);
                 res.json(alarms);
             });
         } else {
@@ -234,7 +226,6 @@ router.route('/month/:month/:year/:esp/:value')
                         res.send(err);
                     }
 
-                    console.log(alarms);
                     res.json(alarms);
                 });
             }
@@ -253,7 +244,6 @@ router.route('/year/:year')
                 res.send(err);
             }
 
-            console.log(alarms);
             res.json(alarms);
         });
     });
@@ -270,7 +260,6 @@ router.route('/year/:year/:esp')
                     res.send(err);
                 }
 
-                console.log(alarms);
                 res.json(alarms);
             });
         } else {
@@ -299,7 +288,6 @@ router.route('/year/:year/:esp/:value')
                         res.send(err);
                     }
 
-                    console.log(alarms);
                     res.json(alarms);
                 });
             }
@@ -316,7 +304,6 @@ router.route('/:id')
                 res.send(err);
             }
 
-            console.log(alarms);
             res.json(alarms);
         });
     });
