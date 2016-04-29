@@ -1,5 +1,12 @@
-# Project 3 - Server
-[Dashboard Repository](https://github.com/Wesleyvd/Dashboard)  
+# Project 3 - Server  
+
+[Dashboard Repository](https://github.com/Wesleyvd/Dashboard)    
+[Dashboard Link](http://dashboard.dennisvanbennekom.com/)  
+
+[Api Repository](https://github.com/LeanderVanBaekel/project3server)
+[Api Link](http://api.leandervanbaekel.nl/)  
+
+
 [tutorial used](https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4)
 
 ## ESP data
