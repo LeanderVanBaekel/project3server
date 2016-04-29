@@ -53,6 +53,9 @@ app.use('/average', averageRouter);
 var activityRouter = require('./routes/activity');
 app.use('/activity', activityRouter);
 
+var settingsRouter = require('./routes/settings');
+app.use('/settings', settingsRouter);
+
 // START THE SERVER
 // =============================================================================
 app.listen(port);
