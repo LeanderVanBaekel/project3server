@@ -24,13 +24,7 @@ router.route('/new/:esp')
 
             var alarm = new Alarm();      // create a new instance of the Bear model
             var date = new Date();
-            if (req.params.esp == 'esp1') {
-                alarm.street = 'Voltaplein 53';
-                alarm.location = 'esp1';  // set the bears name (comes from the request)
-            } else {
-                alarm.street = 'Linnaeusparkweg 101';
-                alarm.location = 'esp2';
-            }
+            alarm.location = req.params.esp;  // set the bears name (comes from the request)
             alarm.day = date.getDate();
             alarm.month = date.getMonth() + 1;
             alarm.year = date.getFullYear();
@@ -58,22 +52,24 @@ router.route('/new/:esp')
 router.route('/update/:id/:value')
     .get(function(req, res){
         var value = req.params.value;
-        var query = {'_id':req.params.id};
 
         if(value == 'true'){
-            Alarm.findOneAndUpdate(query, { $set: { "status": true } }, function(err, doc){
-                if (err) return res.send(500, { error: err });
-            });
+            Alarm.update(
+                { '_id': req.params.id  },
+                { $set: { "status": true } }
+            );
             res.json('Alarm ' + req.params.id + ' updated with status: true');   
         } else if (value == 'false'){
-            Alarm.findOneAndUpdate(query, { $set: { "status": false } }, function(err, doc){
-                if (err) return res.send(500, { error: err });
-            });
+            Alarm.update(
+                { '_id': req.params.id  },
+                { $set: { "status": false } }
+            );
             res.json('Alarm ' + req.params.id + ' updated with status: false');
         } else if (value == 'null'){
-            Alarm.findOneAndUpdate(query, { $set: { "status": null } }, function(err, doc){
-                if (err) return res.send(500, { error: err });
-            });
+            Alarm.update(
+                { '_id': req.params.id  },
+                { $set: { "status": null } }
+            );
             res.json('Alarm ' + req.params.id + ' updated with status: null');
         } else {            
             res.json('Not a valid value. Alarm not updated');
@@ -267,7 +263,7 @@ router.route('/year/:year/:esp')
             var year = req.params.year;
             var esp = req.params.esp;
 
-            var query = Alarm.find({"year": year, location: req.params.esp});
+            var query = Alarm.find({"year": year, location: esp1});
             query.exec(function(err, alarms){
                 if (err){
                     res.send(err);
