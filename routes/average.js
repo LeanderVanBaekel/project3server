@@ -25,6 +25,8 @@ router.route('/day/:esp/:day/:month/:year')
 		var year = req.params.year;
 		var query;
 
+		dataTime = [];
+
 		//for loop that loops over all the ours of the day
 		for(hour = 0; hour < 23; hour++){
 			var beginDate = new Date(year, month, day, hour);
@@ -46,6 +48,8 @@ router.route('/week/:esp/:day/:month/:year')
 		var query;
 		var beginDate = new Date(year, month, startDay, 0, 0);
 		var endDate = new Date(year, month, startDay, 23, 59);
+
+		dataTime = [];
 
 		for(day = 0; day < 7; day++){
 			// if we remove the if statement it skips the day the user put in and starts at the next one
@@ -96,6 +100,8 @@ router.route('/month/:esp/:month/:year')
 		    	}
 		    	break;
 		}
+
+		dateTime = [];
 
 		for(day = 0; day < endDay; day++){
 			beginDate.setDate(beginDate.getDate() + 1);
