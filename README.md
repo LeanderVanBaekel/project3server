@@ -50,7 +50,10 @@ All :value parameters here have to be, true, false or null
 
 ##Get Requests:
 
-- **average/day/:esp/:day/:month/:year** - Get an array with 23 objects representing all the hours, giving the average of the hour.
+- **average/day/:esp/:day/:month/:year** - Get an array with 23 objects representing all the hours, giving the average of the hour, of the specified day.
+- **/week/:esp/:day/:month/:year** - Get an array of 7 days, calculated from the day provided in the query. Ie> 7 april will get you april 7 to and with 13 april
+-**/month/:esp/:month/:year** - Get an array of days, containing the average data per day for everyday of the specified month
+
 
 
 ## Activity
