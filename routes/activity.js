@@ -129,7 +129,9 @@ var checkSuspicion = function(data, esp) {
     	console.log("activity saved. Val = " + activityVal + ". ESP: " + esp);
     });
 
-	if (motionAmount > 5) {
+    console.log("hoi" + activityVal + settingsAlarmTrigger);
+	if (activityVal >= settingsAlarmTrigger) {
+		console.log("ALARM2312");
 		ALARM(esp);
 	} 
 }
@@ -170,16 +172,16 @@ var ALARM = function(esp) {
     // save the bear and check for errors
     alarm.save(function(err) {
         if (err)
-            res.send(err);
+            console.log(err);
 
-        res.json({ message: 'Alarm created!' + alarm });
+        console.log({ message: 'Alarm created!' + alarm });
     });
 };
 
 setInterval(function(){
 	getData("esp1");
 	getData("esp2");
-},300000); 
+},3000); 
 
 
 

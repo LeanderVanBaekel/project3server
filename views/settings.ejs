@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <% include ../partials/head %>
+    <%- include ./partials/head %>
 </head>
 <body class="container">
 
     <main>
-        <div>
-            <h1>This is great</h1>
-            <p>Welcome to templating using EJS</p>
-        </div>
+        <h1><%= data.title%></h1>
+
+		<p>settingsAlarmTrigger is now <%= data.settingsAlarmTrigger%></p>
+        <form action="<%= data.req.baseUrl + "uploaden" %>" method="post">
+        	<label for="value">Value</label>
+        	<input type="number">
+	  		<button>Updaten</button>
+        </form>
     </main>
     
 </body>
