@@ -67,7 +67,6 @@ router.route('/:id/:sensor1/:sensor2/:sensor3')
 	            if (err)
 	                res.send(err);
 
-	            //console.log(esp1);
 	            res.json({ message: 'data saved!!1!' });
 	        });
 
@@ -82,7 +81,6 @@ router.route('/:id/:sensor1/:sensor2/:sensor3')
 			esp2.save(function(err) {
 	            if (err)
 	                res.send(err);
-	            //console.log(esp2);
 	            res.json({ message: 'data saved!!1!' });
 	        });
 
